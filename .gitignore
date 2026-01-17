@@ -1,0 +1,13 @@
+# ===== JAVA =====
+*.class
+
+# ===== NETBEANS =====
+build/
+dist/
+nbproject/private/
+
+# ===== SISTEMA =====
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
