@@ -20,6 +20,25 @@ public class listagemVIEW extends javax.swing.JFrame {
         initComponents();
         listarProdutos();
     }
+    
+    
+    private void carregarTabela() {
+
+    DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
+    model.setRowCount(0); 
+
+    ProdutosDAO dao = new ProdutosDAO();
+    ArrayList<ProdutosDTO> lista = dao.listarProdutos();
+
+    for (ProdutosDTO p : lista) {
+        model.addRow(new Object[]{
+            p.getId(),
+            p.getNome(),
+            p.getValor(),
+            p.getStatus()
+        });
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
