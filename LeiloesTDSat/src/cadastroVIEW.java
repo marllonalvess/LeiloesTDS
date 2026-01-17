@@ -32,11 +32,11 @@ public class cadastroVIEW extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cadastroNome = new javax.swing.JTextField();
-        cadastroValor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnCadastrar = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
+        cadastroValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,17 +94,17 @@ public class cadastroVIEW extends javax.swing.JFrame {
                             .addGap(202, 202, 202)
                             .addComponent(jLabel3))
                         .addGroup(layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
                             .addGap(72, 72, 72)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel5))
                             .addGap(31, 31, 31)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cadastroNome)
-                                .addComponent(cadastroValor, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(37, 37, 37)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cadastroValor)
+                                .addComponent(cadastroNome, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,8 +143,14 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         try {
+
             conectaDAO connect = new conectaDAO();
             connect.connectDB();
+
+            if (cadastroNome.getText().isEmpty() || cadastroValor.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Verifique se os campos estão preenchidos corretamente.");
+                return;
+            }
 
             ProdutosDTO produto = new ProdutosDTO();
             String nome = cadastroNome.getText();
@@ -160,8 +166,10 @@ public class cadastroVIEW extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
             cadastroNome.setText(null);
             cadastroValor.setText(null);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar produto: " + e);
+            return;
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
